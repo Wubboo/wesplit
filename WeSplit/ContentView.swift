@@ -57,8 +57,8 @@ struct ContentView: View {
                         ForEach(tipPercentages, id: \.self){
                             Text("\($0)%")
                         }
-                        .pickerStyle(.segmented)
                     }
+                    .pickerStyle(.segmented)
                     
                 }
                 Section(header: Text("To Pay")){
