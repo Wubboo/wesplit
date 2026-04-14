@@ -25,7 +25,7 @@ struct ContentView: View {
         
         
         
-       // checkAmount.rounded(.down) / Double(numberOfPeople)
+        checkAmount.rounded(.down) / Double(numberOfPeople)
     }
     
     
