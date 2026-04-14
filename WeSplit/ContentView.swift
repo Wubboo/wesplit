@@ -58,7 +58,8 @@ struct ContentView: View {
                     
                 }
                 Section(header: Text("To Pay")){
-                    Text("€\(totalPerPerson)")
+                        Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    
                 }
             }
             .navigationTitle("WeSplit")
