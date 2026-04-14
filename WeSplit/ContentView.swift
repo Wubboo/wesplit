@@ -17,7 +17,7 @@ struct ContentView: View {
     }()
     
     @State private var checkAmount: Double = 0
-    @State private var numberOfPeople: Int = 0
+    @State private var numberOfPeople: Int = 1
     @State private var tipPercentage: Int = 0
 
     
