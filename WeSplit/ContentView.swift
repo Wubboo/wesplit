@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @FocusState private var amountIsFocused: Bool
+    @FocusState private var peopleIsFocused: Bool
     @State private var numberFormatter: NumberFormatter = {
         var numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -18,6 +19,7 @@ struct ContentView: View {
     @State private var checkAmount: Double = 0
     @State private var numberOfPeople: Int = 0
     @State private var tipPercentage: Int = 0
+
     
     
     var totalPerPerson: Double   {
@@ -40,13 +42,15 @@ struct ContentView: View {
         NavigationStack{
             Form{
                 Section(header: Text("Total Amount")){
-                    TextField("\(checkAmount)", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "eur"))
+                    TextField("\(checkAmount)", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                         .keyboardType(.decimalPad)
+                        .focused($amountIsFocused)
                 }
                 Section(header: Text("Amount of people")){
                     
                     TextField("Number of people:", value: $numberOfPeople, formatter: numberFormatter)
                         .keyboardType(.decimalPad)
+                        .focused($peopleIsFocused)
                 }
                 Section(header: Text("Percentage of tip")){
                     Picker("Tip percentage", selection: $tipPercentage){
@@ -58,11 +62,23 @@ struct ContentView: View {
                     
                 }
                 Section(header: Text("To Pay")){
-                        Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                        Text(totalPerPerson, format: .currency(code: Locale.current.currency?.identifier ?? "EUR"))
                     
                 }
             }
             .navigationTitle("WeSplit")
+            .toolbar {
+                if amountIsFocused {
+                    Button("Done") {
+                      amountIsFocused   = false
+                    }
+                }
+                if peopleIsFocused {
+                    Button("Done") {
+                        peopleIsFocused   = false
+                    }
+                }
+            }
             
                 }
             }
